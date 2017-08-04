@@ -9,31 +9,50 @@ export default class App extends Component {
   constructor(){
     super();
     this.state = {
-      messages: ["here's a message", "here's another"],
+      messages: [{user: "Bam Margera", message: "Ape didn't like her present I got her"},
+                 {user: "Dwayne Johnson", message: "Do you smell what I'm cookin'?!"}],
       value: ''
     }
+
+
+    setTimeout(()=>{
+      this.setState({     //setState.messages to state.value (value entered)
+        messages: this.state.messages.concat({user: "Chris Brooks", message: "this is the worst chat ever"})
+      })
+    },5000)
+
+    setTimeout(()=>{
+      this.setState({     //setState.messages to state.value (value entered)
+        messages: this.state.messages.concat({user: "Adam Common", message: "Sorry guys, still crossfitting right now"})
+      })
+    },10000)
   }
 
-
-
-
-
-//dont reload page on submit - reloads by default
   handleSubmit(e){
-    this.setState({
-      messages: this.state.messages.concat(this.state.value)
-    })
     // console.log(this.state);
-    e.preventDefault();
-    console.log("working");
-    this.refs.chatInput.value = "";
+    e.preventDefault();     //dont reload page on submit - reloads by default
+    this.setState({     //setState.messages to state.value (value entered)
+      messages: this.state.messages.concat({user: "me", message: this.state.value})
+    })
+    this.refs.chatInput.value = "";     //clear input box
   }
 
-  handleChange(e){
-    var myVal = e.target.value;
-    this.setState({value: myVal});
-    // console.log(e.target.value);
-    // console.log(myVal);
+  handleChange(e){     //set state on each letter pressed
+    this.setState({value: e.target.value});
+  }
+
+  scrollToBottom = () => {
+    // const node = ReactDOM.findDOMNode(this.messagesEnd);
+    const node = this.refs.messagesEnd;
+    node.scrollIntoView();
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate(){
+    this.scrollToBottom();
   }
 
   render() {
@@ -47,11 +66,18 @@ export default class App extends Component {
           <h1>ChatLog</h1>
 
           <div className="chat-room">
-            <ul>
-            {this.state.messages.map((message, index)=>{
-              return (<li key={index}>{message}</li>)
-            })}
-            </ul>
+            <div className="chat-room-no-scrollbar">
+              <ul>
+              {this.state.messages.map((message, index)=>{
+                if(message.user === "me"){
+                  return (<li key={index} className="flr">{message.message}</li>)
+                }
+                return (<li key={index} className="clear"><span className="user-name">{message.user}</span>: {message.message}</li>)
+              })}
+              </ul>
+              <div style={{ float:"left", clear: "both" }}
+               ref="messagesEnd" />
+             </div>
           </div>
 
           <form onSubmit={this.handleSubmit.bind(this)}>
@@ -65,3 +91,6 @@ export default class App extends Component {
 }
 
 // <ChatLog />
+
+// <div style={{ float:"left", clear: "both" }}
+ // ref={(el) => { this.messagesEnd = el; }} />

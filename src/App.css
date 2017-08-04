@@ -8,8 +8,17 @@ ul {
 }
 
 li {
-  padding: 2px;
+  padding: 2px 4px;
   list-style-type: none;
+}
+
+.flr {
+  float: right;
+  clear: both;
+}
+
+.clear {
+  clear: both;
 }
 
 .App-logo {
@@ -33,17 +42,36 @@ li {
   font-size: large;
 }
 
+/* allows for no scroll bar*/
 .App-intro .chat-room {
+  position: relative;
+  margin: 0 auto;
   width: 80%;
   height: 40vh;
-  padding: 5px;
-
+  z-index: 100;
+  overflow: hidden;
   border: 1px solid black;
+}
+
+/* allows for no scroll bar*/
+.App-intro .chat-room .chat-room-no-scrollbar {
+  padding-right: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: -9px;
+  overflow-y: scroll;
+}
+
+.App-intro .chat-room .user-name {
+  font-weight: bold;
+  font-style: italic;
 }
 
 .App-intro form {
   width: 80%;
-  margin: 10px 0;
+  margin: 10px auto;
   display: flex;
   justify-content: space-between;
 }
