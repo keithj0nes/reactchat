@@ -1,5 +1,15 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 2px;
+  list-style-type: none;
 }
 
 .App-logo {
@@ -12,11 +22,43 @@
   height: 150px;
   padding: 20px;
   color: white;
+  text-align: center;
 }
 
 .App-intro {
+  padding: 20px;
+}
+
+.App-intro h1 {
   font-size: large;
 }
+
+.App-intro .chat-room {
+  width: 80%;
+  height: 40vh;
+  padding: 5px;
+
+  border: 1px solid black;
+}
+
+.App-intro form {
+  width: 80%;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.App-intro form input {
+  width: 88%;
+  padding: 5px;
+}
+
+.App-intro form button {
+  min-width: 16%;
+  /*max-width: 7%;*/
+  padding: 5px;
+}
+
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
